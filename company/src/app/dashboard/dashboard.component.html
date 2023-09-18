@@ -1,0 +1,134 @@
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <h5 class="navbar-brand" href="#">EMPLOYEE  DETAILS</h5>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+           <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addEmployee" type="submit">Add Employee</button>
+           
+          </div>
+        </div>
+      </nav>
+
+      <table class="table table-bordered danger-subtle table table-striped  table-responsive-md text-center">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>employeeId</th>
+            <th>firstName</th>
+            <th>middleName</th>
+            <th>lastName</th>
+            <th>password</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let companyDto of employeelist">
+            <td>{{companyDto .id}}</td>
+            <td>{{companyDto .employeeId}}</td>
+            <td>{{companyDto .firstName}}</td>
+            <td>{{companyDto .middleName}}</td>
+            <td>{{companyDto .lastName}}</td>
+            <td>{{companyDto .password}}</td>
+            <td>
+              <button type="button" class="btn btn-outline-primary me-2"data-bs-toggle="modal" data-bs-target="#editEmployee" (click)="editEmployee(companyDto)"><i class="fa-solid fa-pen-to-square"></i></button>
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+              <button type="button" class="btn btn-outline-danger"(click)="deleteEmployee(companyDto)"><i class="fa-solid fa-trash"></i></button>
+             </td>
+          </tr>
+          </tbody>
+          </table>
+
+     
+  <!-- Add Employee Modal -->
+  <div class="modal fade" id="addEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Employee</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="employee">
+                <div class="form-group">
+                    <label for="id" class="form-label">id</label>
+                    <input type="text" formControlName="id" class="form-control" id="id" aria-describedby="idHelp">
+                  </div>
+                  <div class="form-group">
+                    <label for="employeeId" class="form-label">employeeId</label>
+                    <input type="text" formControlName="employeeId" class="form-control" id="employeeId" aria-describedby="employeeId">
+                  </div>
+                <div class="form-group">
+                  <label for="firstName" class="form-label">firstName</label>
+                  <input type="text" formControlName="firstName"  class="form-control" id="FirsName" aria-describedby="firstNameHelp">
+                </div>
+                <div class="form-group">
+                    <label for="middleName" class="form-label">middleName</label>
+                    <input type="text" formControlName="middleName" class="form-control" id="middleName" aria-describedby="middleNameHelp">
+                  </div>
+                  <div class="form-group">
+                    <label for="lastName" class="form-label">lastName</label>
+                    <input type="text" formControlName="lastName" class="form-control" id="lastName" aria-describedby="lastNameHelp">
+                  </div>
+                  <div class="form-group">
+                    <label for="password" class="form-label">password</label>
+                    <input type="text" formControlName="password" class="form-control" id="password" aria-describedby="passwordHelp">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="addEmployee()" data-bs-dismiss="modal">Add Employee</button>
+                    
+                  </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+
+<!-- Edit Employee Modal -->
+<div class="modal fade" id="editEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fs-5" id="exampleModalLabel">Edit Employee</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="employee">
+          <div class="form-group">
+              <label for="id" class="form-label">id</label>
+              <input type="text"  formControlName="id" class="form-control" id="id" aria-describedby="idHelp">
+            </div>
+            <div class="form-group">
+              <label for="id" class="form-label">employeeId</label>
+              <input type="text"  formControlName="employeeId" class="form-control" id="employeeId" aria-describedby="employeeIdHelp">
+            </div>
+          <div class="form-group">
+            <label for="firstName" class="form-label">firstName</label>
+            <input type="text" formControlName="firstName"  class="form-control" id="FirsName" aria-describedby="firstNameHelp">
+          </div>
+          <div class="form-group">
+              <label for="middleName" class="form-label">middleName</label>
+              <input type="text" formControlName="middleName" class="form-control" id="middleName" aria-describedby="middleNameHelp">
+            </div>
+            <div class="form-group">
+              <label for="lastName" class="form-label">lastName</label>
+              <input type="text" formControlName="lastName" class="form-control" id="lastName" aria-describedby="lastNameHelp">
+            </div>
+            <div class="form-group">
+              <label for="password" class="form-label">password</label>
+              <input type="text" formControlName="password" class="form-control" id="password" aria-describedby="passwordHelp">
+           </div>
+         <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-success" (click)="updateEmployee()"data-bs-dismiss="modal">Update</button>
+      </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+       
